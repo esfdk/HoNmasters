@@ -2,9 +2,11 @@ package bosk.ovelser.ovelse6.ovelse25;
 import bosk.ovelser.ovelse6.ovelse25.Weekday;
 
 
-/*
-* Illustrerer hvordan man kan lave indlejrede / nestede klasser
-*/
+/**
+ * Class WeekdayTester is used to test internal implementation of Weekday
+ * @author Jakob Melnyk
+ * @version Vers 1
+ */
 public class WeekdayTester{
 	public static void main( String[] args ){
 		Weekday dkDay = Weekday.createDanishWeekday();
@@ -15,6 +17,11 @@ public class WeekdayTester{
 		System.out.println(ukDay);
 	}
 }
+/**
+ * Class Weekday is intended to be extended into different regional weekdays.
+ * @author Jakob Melnyk
+ * @version Vers 1
+ */
 abstract class Weekday{
 	int day;
 	void setDay( int day ){
@@ -23,7 +30,10 @@ abstract class Weekday{
 		}
 		this.day = day;
 	}
-	
+	/**
+	 * Creates and returns a weekday of the Danish region type.
+	 * @return A weekday object of the Danish region type
+	 */
 	public static Weekday createDanishWeekday() {
 		return new Weekday(){
 				public String toString(){
@@ -39,6 +49,10 @@ abstract class Weekday{
 			}
 		};
 	}
+	/**
+	 * Creates and returns a weekday of the English region type.
+	 * @return A weekday object of the English region type
+	 */
 	static Weekday createEnglishWeekday(){
 		return new Weekday(){
 			public String toString(){
