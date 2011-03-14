@@ -1,23 +1,22 @@
 package bosk.ovelser.ovelse6.ovelse25;
 import bosk.ovelser.ovelse6.ovelse25.Time;
 
-
 /*
-* Illustrerer hvordan man kan lave anonyme klasser.
-* Nedarver fra klassen Time.
+* 
+* 
 */
 public class TimeTester{
 	public static void main( String[] args ){
-		Time dkTime = Time.createDanishTime();
-		dkTime.setTime( 2, 54 );
-		System.out.println( dkTime );
-		dkTime.setTime( 13, 35 );
-		System.out.println( dkTime );
+		Time dkTime = new Time.Danish();
+		dkTime.setTime(2, 54);
+		System.out.println(dkTime);
+		dkTime.setTime(13, 35);
+		System.out.println(dkTime);
 
-		Time ukTime = Time.createEnglishTime();
-		ukTime.setTime( 2, 54 );
+		Time ukTime = new Time.English();
+		ukTime.setTime(2, 54);
 		System.out.println( ukTime );
-		ukTime.setTime( 13, 35 );
+		ukTime.setTime(13, 35);
 		System.out.println( ukTime );
 	}
 }
@@ -33,15 +32,12 @@ abstract class Time{
 		}
 		this.minutes = minutes;
 	}
-	static Time createDanishTime(){
-		return new Time(){
+	static class Danish extends Time{
 			public String toString(){
 				return hour + ":" + minutes;
 			}
-		}; // bemærk semikolon'et
-	}
-	static Time createEnglishTime(){
-		return new Time(){
+		}
+	static class English extends Time{
 			public String toString(){
 				if( hour == 0 ){
 					return "12:" + minutes + " AM";	
@@ -53,6 +49,5 @@ abstract class Time{
 					return (hour-12) + ":" + minutes + " PM";
 				}
 			}
-		}; // bemærk semikolon'et
+		}
 	}
-}
