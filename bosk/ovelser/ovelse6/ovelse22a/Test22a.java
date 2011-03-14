@@ -3,7 +3,10 @@ package bosk.ovelser.ovelse6.ovelse22a;
 import java.util.ArrayList;
 
 public class Test22a {
-	
+	/**
+	 *  Tests the system to check if a person can
+	 *  be a Consultant or a Instructor
+	 */
 	public static void main(String[] args){
 		  Instructor a = new Instructor("Jens", new ArrayList<String>());
 		  a.addCourse("BGPP");

@@ -3,7 +3,11 @@ package bosk.ovelser.ovelse6.ovelse22b;
 import java.util.ArrayList;
 
 public class Test22b {
-	
+	/**
+	 *  Tests the system to check if a person
+	 *  can have both a consultant and instructor role
+	 * @param args
+	 */
 	public static void main(String[] args){
 		  Person a = new Person("Jens", new ArrayList<Role>());
 		  ArrayList<String> temp = new ArrayList<String>();
