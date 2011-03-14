@@ -34,7 +34,7 @@ private ArrayList<String> courses;
 	{
 		String s = "Courses: ";
 		for(String c : courses){
-			s += c;
+			s += c + ", ";
 		}
 		return s;
 	}
