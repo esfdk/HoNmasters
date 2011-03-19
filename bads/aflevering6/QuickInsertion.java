@@ -1,4 +1,5 @@
 package bads.aflevering6;
+
 /**
  * 
  * @author Jakob Melnyk
