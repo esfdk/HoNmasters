@@ -11,6 +11,7 @@ public class FileInfo {
 
 	/**
 	 * Constructor for class FileInfo
+	 * 
 	 * @param f The File object info is wanted from.
 	 */
 	public FileInfo(File f) {
@@ -19,8 +20,9 @@ public class FileInfo {
 
 	/**
 	 * Constructor for class FileInfo with a filter included
+	 * 
 	 * @param f The File object info is wanted from.
-	 * @param s
+	 * @param s The String the FileInfo should look for in its directory.
 	 */
 	public FileInfo(File f, final String filter) {
 		file = f;
@@ -33,9 +35,10 @@ public class FileInfo {
 	}
 
 	/**
-	 * 
-	 * @param path
-	 * @return
+	 * If the FileInfo object was not constructed with a filter, it will check all files.
+	 *  
+	 * @param path A File object containing the path of the directory to be checked.
+	 * @return A String with info about the number of files in the path.
 	 */
 	private String numberOfFilesInPath(File path){
 		if(fnf == null){
@@ -47,9 +50,10 @@ public class FileInfo {
 	}
 
 	/**
+	 * If the FileInfo object was not constructed with a filter, it will check all files.
 	 * 
-	 * @param path
-	 * @return
+	 * @param path A File object containing the path of the directory to be checked.
+	 * @return A String with info about the size of the files in the path.
 	 */
 	private String sizeOfFilesInPath(File path){
 		int size = 0;
@@ -66,6 +70,10 @@ public class FileInfo {
 		return " with a total size of " + size + " bytes.";
 	}
 
+	/*'
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString(){
 		return numberOfFilesInPath(file) + sizeOfFilesInPath(file);
