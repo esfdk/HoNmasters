@@ -42,7 +42,7 @@ public class WriterFork {
 	}
 
 	public static void main(String[] args) {
-		File file = new File("test.txt");
+		File file = new File("src/test.txt");
 		BufferedWriter con = new BufferedWriter(new OutputStreamWriter(System.out));
 
 		try {
