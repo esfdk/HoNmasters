@@ -54,6 +54,5 @@ public class WriterFork {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 }
