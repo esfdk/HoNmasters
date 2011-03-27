@@ -13,12 +13,14 @@ public class Main {
 	public static void main(String [] args){
 		System.out.println("Calling startEngine");
 		Car c = new Car("Porsche");
+		
 		//Catches an exception and handles it.
 		try{
 			c.stopEngine();
 		}catch(Exception e){
 			System.out.println("Could not stop engine");
 		}
+		
 		try{
 			driveCar(c);	
 		}catch(Exception e){

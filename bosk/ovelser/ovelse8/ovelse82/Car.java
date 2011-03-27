@@ -4,6 +4,7 @@ package bosk.ovelser.ovelse8.ovelse82;
  * "Viderekast fejlen – dvs. erklær den i metodens throws-del"
  */ 
 public class Car {
+	
 	private String name;
 	private boolean engineRunning;
 	private boolean carBlocked;
@@ -14,6 +15,9 @@ public class Car {
 		carBlocked = false;
 	}
 
+	/**
+	 * Starts the car's engine.
+	 */
 	public void startEngine(){
 		if(!engineRunning){
 			engineRunning = true;
@@ -23,6 +27,9 @@ public class Car {
 		}
 	}
 
+	/**
+	 * Stops the car's engine.
+	 */
 	public void stopEngine(){
 		if(engineRunning){
 			engineRunning = false;
@@ -32,7 +39,11 @@ public class Car {
 		}
 	}
 
-	//Throws an exception.
+	/**
+	 * Tries to make the car drive.
+	 * 
+	 * @throws CarBlockedException
+	 */
 	public void drive() throws CarBlockedException{
 		if(!carBlocked){
 			//TODO Make car move
