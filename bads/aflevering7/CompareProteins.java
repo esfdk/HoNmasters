@@ -17,8 +17,10 @@ public class CompareProteins {
 		int d = 10000;
 		ArrayList<String> races = new ArrayList<String>();
 		ArrayList<int[]> profiles = new ArrayList<int[]>();
-		races.add(StdIn.readLine());
-		profiles.add(calculateProfile(StdIn.readLine(), k, d));
+		while(!StdIn.isEmpty()){
+			races.add(StdIn.readLine());
+			profiles.add(calculateProfile(StdIn.readLine(), k, d));
+		}
 		for(int[] profile : profiles){
 			for(int [] profile2 : profiles){
 				StdOut.print(compareProfiles(profile, profile2) + ", ");
@@ -30,7 +32,7 @@ public class CompareProteins {
 	private static int[] calculateProfile(String protein, int k, int d){
 		int[] temp = new int[50000];
 		for(int i = 0; i <= protein.length() - k; i++){
-			temp[protein.substring(i, i + k - 1).hashCode() % d] ++;
+			temp[(Math.abs(protein.substring(i, i + k - 1).hashCode())) % d] ++;
 		}
 		return temp;
 	}
