@@ -9,6 +9,13 @@ public class CompareProteins {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		int[] a = new int[2];
+		int[] b = new int[2];
+		a[0] = 5;
+		b[1] = 5;
+		if(compareProfiles(a, b) == 0){
+			StdOut.println("Test passed!");
+		}
 		int k = 20;
 		int d = 10000;
 		ArrayList<String> races = new ArrayList<String>();
