@@ -1,15 +1,11 @@
 package bads.aflevering7;
 
-import java.util.ArrayList;
-
 import stdlib.StdIn;
 import stdlib.StdOut;
+import java.util.ArrayList;
 
 public class CompareProteins {
-
 	/**
-	 * 
-	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -19,27 +15,32 @@ public class CompareProteins {
 		ArrayList<int[]> profiles = new ArrayList<int[]>();
 		while(!StdIn.isEmpty()){
 			races.add(StdIn.readLine());
-			profiles.add(calculateProfile(StdIn.readLine(), k, d));
+			profiles.add(calculateProfile(StdIn.readLine() + StdIn.readLine() + StdIn.readLine(), k, d));
 		}
-		for(int[] profile : profiles){
-			for(int [] profile2 : profiles){
-				StdOut.print(compareProfiles(profile, profile2) + ", ");
+		StdOut.println(races.size() + ", " + profiles.size());
+		for(int i = 0; i < profiles.size(); i++){
+			StdOut.println(races.get(i));
+			for(int j = 0; j < profiles.size(); j++){
+				StdOut.print("\t" + races.get(j) + " " + compareProfiles(profiles.get(i), profiles.get(j)) + ", ");
 				StdOut.println();
 			}
+			StdOut.println();
 		}
 	}
 	
 	private static int[] calculateProfile(String protein, int k, int d){
 		int[] temp = new int[50000];
 		for(int i = 0; i <= protein.length() - k; i++){
-			temp[(Math.abs(protein.substring(i, i + k - 1).hashCode())) % d] ++;
+			temp[Math.abs(protein.substring(i, i + k - 1).hashCode()) % d] ++;
 		}
 		return temp;
 	}
 	
 	private static double compareProfiles(int[] a, int[] b){
-		double temp = calculateDotProduct(a, b);
-		return  calculateAngleBetweenVectors(a, b, temp);
+		double c = calculateDotProduct(a, b);
+		double d = calculateVectorLength(a);
+		double e = calculateVectorLength(b);
+		return  calculateAngleBetweenVectors(a, b, c, d, e);
 	}
 	
 	private static double calculateDotProduct(int[] a, int[] b){
@@ -51,9 +52,16 @@ public class CompareProteins {
 		return value;
 	}
 	
-	private static double calculateAngleBetweenVectors(int[] a, int[] b, double c){
+	private static double calculateVectorLength(int[] a){
+		double temp = 0;
+		for(int i : a){
+			temp += Math.pow(i, 2);
+		}
+		return Math.sqrt(temp);
+	}
+	private static double calculateAngleBetweenVectors(int[] a, int[] b, double c, double d, double e){
 		double value = 0;
-		value = c / (a.length * b.length);
-		return Math.cos(value);
+		value = c / (d * e);
+		return value;
 	}
 }
