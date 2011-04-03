@@ -1,6 +1,4 @@
 package bosk.ovelser.ovelse7.ovelse71;
-
-
 public class TrafficLight {
 	
 	SignalColor colorOfLight = SignalColor.RED;
