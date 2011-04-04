@@ -7,63 +7,81 @@ import java.util.NoSuchElementException;
 import stdlib.In;
 import stdlib.StdOut;
 
+/**
+ * Class Words is used to test if there is a way from one word to another in a collection of words. 
+ * 
+ * @author Jakob Melnyk & Frederik Roden Lysgaard
+ * @version 1
+ *
+ */
 public class Words {
 
+	/**
+	 * Runs the test.
+	 * 
+	 * @param args Location of file to be used in Words.
+	 */
 	public static void main(String[] args) {
-		In dat = new In(args[0] + ".dat");
-		In in = new In(args[0] + "-test.in");
-		ArrayList<String> words = new ArrayList<String>();
-		while(!dat.isEmpty()){
+		//In objects from Stdlib.
+		In dat = new In(args[0] + ".dat"); //In file used to construct the Word graph.
+		In in = new In(args[0] + "-test.in"); //In file containing the words to be checked.
+
+
+		ArrayList<String> words = new ArrayList<String>(); //List to hold the words, so that we can later refer to it using an index.
+
+		while(!dat.isEmpty()){ // Fills out the List with the Words from the .dat file.
 			words.add(dat.readLine());
 		}
-		
+
 		Words w = new Words(); //Only used to make the Inner objects Digraph and BreadthFirstDirectedPaths
-		
-		Digraph dg = w.new Digraph(words.size());
-		for(String s : words){
+
+		Digraph dg = w.new Digraph(words.size()); //Constructs the Directed Graph from the size of the list of Words.
+
+		//Fills out the edges in the Directed Graph. This is done in Quadratic time. :/
+		for(String s : words){ 
 			for(String a : words){
-				if(!a.equals(s)){
-					//System.out.println(s + " " + a);
-					//System.out.println(compareWords(s, a));
-					if(compareWords(s.substring(1), a)){
-						//System.out.println(s + " " + a);
-						//System.out.println(words.indexOf(s) + " " + words.indexOf(a));
+				if(!a.equals(s)){ //Checks if it's the same word - if they are, we should not addEdges from the word to itself.
+					if(compareWords(s, a)){ //Checks if there should be an arc from s to a.
 						dg.addEdge(words.indexOf(s), words.indexOf(a));
 					}
 				}
 			}
 		}
-		while(!in.isEmpty()){
+
+		while(!in.isEmpty()){	//Runs BFS on the word combinations from the -test.in file and prints the result.
 			BreadthFirstDirectedPaths BFS = w.new BreadthFirstDirectedPaths(dg, words.indexOf(in.readString()));
 			StdOut.println(BFS.distTo(words.indexOf(in.readString())));
 		}
 	}
 
 	/**
-	 * Checks if there should be an arc from A to B.
+	 * Checks if there should be an arc from A to B. May work on longer or shorter strings, but has not been tested.
 	 * 
-	 * @param a First word.
-	 * @param b Second word.
-	 * @return If there should be a graph, returns true. Else, false.
+	 * @param a First word. Must be five letters to provide a proper result.
+	 * @param b Second word. Must be five letters to provide a proper result.
+	 * @return If there should be an arc, returns true. Else, returns false.
 	 */
 	private static boolean compareWords(String a, String b){
+		//There are different ways to do this - we could also have removed one letter from the b word, 
+		//sorted both Strings and then compared them. This would have meant that we did not need to run compareWords recursively.
 		String temp = "";
-		if(a.length() == 0) return true;
-		if(b.indexOf(a.charAt(0)) == -1){
-			return false;
+		String first = a.substring(1);
+
+		if(first.length() == 0) return true; //If a is empty and we have not yet returned false, then there should be an arc from a to b.
+
+		if(b.indexOf(first.charAt(0)) == -1){
+			return false; //If an element in the first word does not exist in the second word, then the comparison fails. 
 		}
-		for(int i = 0; i < b.length(); i++){
-			if(b.charAt(i) == (a.charAt(0))){
-				if(i != 0)temp += b.substring(0, i);
-				if(i != b.length()-1)temp += b.substring(i+1);
-				return compareWords(a.substring(1), temp);
-			}
-		}
-		return true;
+
+		int i = b.indexOf(first.charAt(0)); //i is the index of the first letter in the a String.
+		if(i != 0)temp += b.substring(0, i); //If i is at the start of the String, this should not add anything to the temp String
+		if(i != b.length()-1)temp += b.substring(i+1); //If i is at the end of the b-string, it should not add anything to the temp String.
+
+		return compareWords(first, temp); // Recursive.
 	}
-	
-	
+
 	//Classes borrowed from http://algs4.cs.princeton.edu/code/
+	//Not our own implementation!
 	public class Digraph {
 		private final int V;
 		private int E;
