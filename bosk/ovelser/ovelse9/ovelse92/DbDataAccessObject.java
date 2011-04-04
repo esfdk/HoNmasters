@@ -6,9 +6,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * This object is used to connect to the database.
+ * 
+ * @author Jakob Melnyk & Frederik Roden Lysgaard
+ * @version 1
+ */
 public class DbDataAccessObject {
-
-	public static void savePerson(Person person) throws SQLException, Exception {
+	
+	/**
+	 * Saves a person to the database.
+	 * 
+	 * @param person The person to be saved to the database.
+	 * @throws Exception If an error happens when trying to work with the database.
+	 */
+	public static void savePerson(Person person) throws Exception {
 		Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
 		String url = "jdbc:derby:PersonDB;create=true";
 		Connection con = DriverManager.getConnection(url);
@@ -22,8 +34,15 @@ public class DbDataAccessObject {
 		savePerson.execute();
 		con.commit();
 	}
-
-	public static Person loadPerson(int id) throws SQLException, Exception {
+	
+	/**
+	 * Gets a person from the database from the given id.
+	 * 
+	 * @param id The ID of the person be loaded from the database.
+	 * @return The person from the database.
+	 * @throws Exception If an error happens when working with the database.
+	 */
+	public static Person loadPerson(int id) throws Exception {
 		Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
 		String url = "jdbc:derby:PersonDB;create=true";
 		Connection con = DriverManager.getConnection(url);
