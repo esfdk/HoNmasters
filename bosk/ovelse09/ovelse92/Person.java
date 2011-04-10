@@ -1,0 +1,41 @@
+package bosk.ovelse09.ovelse92;
+
+public class Person {
+
+	private int id;
+	private String firstName;
+	private String lastName;
+
+	public Person(int id, String firstName, String lastName) {
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public String toString() {
+		String s = "Person[id=" + id;
+		s += ", firstName=" + firstName;
+		s += ", lastName=" + lastName + "]";
+		return s;
+	}
+}
