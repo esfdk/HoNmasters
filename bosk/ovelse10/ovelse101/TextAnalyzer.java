@@ -11,29 +11,34 @@ import java.util.TreeSet;
 public class TextAnalyzer {
 	
 	public static void main(String[] args){
-		List<String> tl = new ArrayList<String>();
-		Set<String> ts = new TreeSet<String>();
-		Map<String, Integer> tm = new TreeMap<String, Integer>();
+		List<String> textList = new ArrayList<String>();
+		Set<String> textSet = new TreeSet<String>();
+		Map<String, Integer> textMap = new TreeMap<String, Integer>();
 		
-		tl.addAll(Text.getTextAsLinkedList());
-		ts.addAll(tl);
+		textList.addAll(Text.getTextAsLinkedList());
+		textSet.addAll(textList);
 		
-		for(String s : tl){
-			if(tm.containsKey(s)){
-				tm.put(s, tm.get(s) + 1);
+		for(String s : textList){
+			if(textMap.containsKey(s)){ //If the string already exists in the map, increase the value by one. 
+				textMap.put(s, textMap.get(s) + 1);
 			}
-			else{
-				tm.put(s, 1);
+			else{//If it doesn't exist in the map, put it there with a value of 1.
+				textMap.put(s, 1);
 			}
 		}
 		
-		System.out.println(tl.size());
-		System.out.println(tl.get(45)); //This could also be index 44, depending on how you understand the assignment.
-		System.out.println(ts.size());
-		System.out.println(ts);
-		Collections.sort(tl);
-		System.out.println(tl);
-		System.out.println(tm);
+		//Opgave a
+		System.out.println(textList.size()); 
+		//Opgave b
+		System.out.println(textList.get(45)); //This could also be index 44, depending on how you understand the assignment.
+		//Opgave c
+		System.out.println(textSet.size());
+		//Opgave d
+		System.out.println(textSet);
+		//Opgave e
+		Collections.sort(textList); //Sorts the textList.
+		System.out.println(textList);
+		//Opgave f
+		System.out.println(textMap);
 	}
-
 }

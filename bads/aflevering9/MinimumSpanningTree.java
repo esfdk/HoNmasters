@@ -10,45 +10,53 @@ import stdlib.StdIn;
 public class MinimumSpanningTree {		
 
 	public static void main(String[] args) {
-		MinimumSpanningTree mst = new MinimumSpanningTree();
-		HashMap<String, Integer> cities = new HashMap<String, Integer>();
-		ArrayList<Edge> edges = new ArrayList<Edge>();
+		//Initialization of fields.
+		
+		MinimumSpanningTree mst = new MinimumSpanningTree(); //Used to create objects of the inner class - could also just pass String[] args to a constructor.
+		HashMap<String, Integer> nodes = new HashMap<String, Integer>(); //Keeps track of cities and their index. Means that no change of Graphs etc. are necessary
+		ArrayList<Edge> edges = new ArrayList<Edge>(); //The list of edges when they are read into the program.
 		
 		String temp = null;
-		String city1 = null;
-		String city2 = null;
+		String node1 = null;
+		String node2 = null;
 		int weight = 0;
 		Integer i = 0;
 
 		while(!StdIn.isEmpty()){
 			temp = StdIn.readLine();
 			if(!temp.contains("--")){
-				cities.put(temp.substring(0, temp.length() - 1), i++);
+				//If the line read from the file does not contain "--" it should not be an edge and is therefore a node.
+				nodes.put(temp.substring(0, temp.length() - 1), i++);
 			}
 			else{
-				city1 = temp.substring(0, temp.indexOf("--"));
-				city2 = temp.substring(temp.indexOf("--") + 2, temp.indexOf("[") - 1);
+				//Name of the first node.
+				node1 = temp.substring(0, temp.indexOf("--"));
+				//Name of the second node.
+				node2 = temp.substring(temp.indexOf("--") + 2, temp.indexOf("[") - 1);
+				//Weight of the edge.
 				weight = Integer.parseInt(temp.substring(temp.indexOf("[") + 1, temp.indexOf("]")));
-				
-				/*
-				System.out.println(cities.get(city1));
-				System.out.println(city1);
-				System.out.println(cities.get(city2));
-				System.out.println(city2);
-				*/
-				edges.add(mst.new Edge(cities.get(city1), cities.get(city2), weight));
+
+				//Gets the index of the two nodes and creates an edge.
+				edges.add(mst.new Edge(nodes.get(node1), nodes.get(node2), weight));
 			}
 		}
 
-		EdgeWeightedGraph ewg = mst.new EdgeWeightedGraph(cities.size());
-		
+		//Creates the graph with the amount of nodes read from the file.
+		EdgeWeightedGraph ewg = mst.new EdgeWeightedGraph(nodes.size());
+	
 		for(Edge e : edges){
-			ewg.addEdge(e);
+			ewg.addEdge(e); //Adds all the edges to graph ewg.
 		}
+		
+		//Finds the minimum spanning tree using an eager Prim's algorithm.
 		PrimMST prim = mst.new PrimMST(ewg);
+		
+		//Prints out the weight of the minimum spanning tree.
 		System.out.println(prim.weight());
 	}
 
+	// Following classes have been borrowed from http://algs4.cs.princeton.edu/code/
+	
 	public class EdgeWeightedGraph {
 		private final int V;
 		private int E;
