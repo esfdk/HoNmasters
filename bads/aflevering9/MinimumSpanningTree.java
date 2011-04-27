@@ -267,7 +267,7 @@ public class MinimumSpanningTree {
 		}
 	}
 
-	public class Bag<Item> implements Iterable<Item> {
+	private static class Bag<Item> implements Iterable<Item> {
 		private int N;         // number of elements in bag
 		private Node first;    // beginning of bag
 
