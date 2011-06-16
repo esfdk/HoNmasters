@@ -18,6 +18,5 @@ public class Insertion{
 		int t = a[i]; 
 		a[i] = a[j]; 
 		a[j] = t;
-	}
-	
+	}	
 }
