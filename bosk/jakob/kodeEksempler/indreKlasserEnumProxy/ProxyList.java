@@ -12,19 +12,16 @@ public class ProxyList implements List{
 	public ProxyList(List list){
 		proxy = list;
 	}
-
 	@Override
 	public Object remove(int index) {
 		System.out.println("proxy!");
 		return proxy.remove(index);
 	}
-
 	@Override
 	public boolean add(Object e) {
 		System.out.println("proxy!");
 		return proxy.add(e);
 	}
-
 	@Override
 	public int size() {
 		System.out.println("proxy!");
